@@ -1,13 +1,10 @@
 package worker.task;
 
 import worker.message.Message;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-@Configuration
 public abstract class Task {
     protected Message message;
 
@@ -18,30 +15,29 @@ public abstract class Task {
         this.message = message;
     }
 
+    public abstract WorkResult process();
+
     public enum Type {
         INSERT {
-
             @Override
-            @Bean
-            public InsertTask toTask(Message message) {
-                return new InsertTask(message);
+            public InsertTask getTask() {
+                return new InsertTask();
             }
         }, LOGIN {
-
             @Override
-            @Bean
-            public LoginTask toTask(Message message) {
-                return new LoginTask(message);
+            public LoginTask getTask() {
+                return new LoginTask();
             }
         };
 
-        public abstract <T extends Task, M extends Message> T toTask(M message);
-
-//        private <T extends Task> T getBean() {
-//            JavaConfigApplicationContext context = new JavaConfigApplicationContext();
-//            Map matchingBeans = context.getBeansOfType(Service.class);
-//        }
+        public abstract <T extends Task> T getTask();
     }
 
-    public abstract WorkResult process();
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
 }

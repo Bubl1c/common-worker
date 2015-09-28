@@ -1,5 +1,6 @@
 package worker.task;
 
+import worker.MessageToTaskConverter;
 import worker.message.Message;
 import worker.message.MessageBroker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,17 @@ public class TaskOperator/*<T extends Task>*/ {
     @Autowired
     MessageBroker messageBroker;
 
+    @Autowired
+    TaskFactory taskFactory;
+
+    @Autowired
+    MessageToTaskConverter messageToTaskConverter;
+
     public void doProcess() {
         int counter = 0;
         while(counter < 1) {
             Message message = messageBroker.get();
-            Task task = message.getTaskType().toTask(message);
+            Task task = messageToTaskConverter.convert(message);
             sendResult(task.process());
             counter++;
         }

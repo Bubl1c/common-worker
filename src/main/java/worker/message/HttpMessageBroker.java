@@ -1,8 +1,8 @@
 package worker.message;
 
-import worker.task.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import worker.task.Task;
 
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
