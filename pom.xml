@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.ncube.cyberpol</groupId>
-	<artifactId>cyberpol-worker</artifactId>
+	<groupId>org.ncube</groupId>
+	<artifactId>common-worker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>cyberpol-worker</name>
-	<description>Cyberpol project by NCube</description>
+	<name>common-worker</name>
+	<description>Basic worker project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

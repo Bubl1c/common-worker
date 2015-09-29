@@ -18,7 +18,6 @@ public class DefaultMessageToTaskConverter implements MessageToTaskConverter<Tas
     @Override
     public Task convert(Message message) {
         Task task = (Task) applicationContext.getBean(message.getTaskType().getTaskClass());
-        task.process();
         task.setMessage(message);
         return task;
     }
