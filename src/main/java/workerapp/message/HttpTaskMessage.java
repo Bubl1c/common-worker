@@ -1,20 +1,20 @@
-package worker.message;
+package workerapp.message;
 
-import worker.task.Task;
+import workerapp.task.Task;
 
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-public class HttpMessage extends Message<HttpMessage.Content> {
+public class HttpTaskMessage extends TaskMessage<HttpTaskMessage.Content> {
 
-    public HttpMessage() {
+    public HttpTaskMessage() {
     }
 
-    public HttpMessage(String id, Task.Type taskType, Content content) {
+    public HttpTaskMessage(String id, Task.Type taskType, Content content) {
         super(id, taskType, content);
     }
 
-    public static class Content extends Message.Content {
+    public static class Content extends TaskMessage.Content {
         protected String data;
 
         public Content() {

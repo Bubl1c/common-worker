@@ -1,4 +1,4 @@
-package worker;
+package workerapp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

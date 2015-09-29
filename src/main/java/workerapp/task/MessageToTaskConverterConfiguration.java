@@ -1,14 +1,15 @@
-package worker;
+package workerapp.task;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import worker.task.InsertTask;
-import worker.task.LoginTask;
-import worker.task.Task;
+import workerapp.task.impl.InsertTask;
+import workerapp.task.impl.InvalidTask;
+import workerapp.task.impl.LoginTask;
+import workerapp.task.impl.StopTask;
 
 /**
- * Created by Serhii Hychka, OT on 29/09/15.
+ * Created by Andrii Mozharovskyi on 29/09/15.
  */
 @Configuration
 public class MessageToTaskConverterConfiguration {
@@ -16,7 +17,6 @@ public class MessageToTaskConverterConfiguration {
     @Bean
     public MessageToTaskConverter defaultMessageToTaskConverter(){
         return message -> task(message.getTaskType());
-
     }
 
     @Bean
@@ -24,7 +24,10 @@ public class MessageToTaskConverterConfiguration {
     public Task task(Task.Type type){
         switch (type) {
             case LOGIN: return new LoginTask();
-            default: return new InsertTask();
+            case INSERT: return new InsertTask();
+            case STOP: return new StopTask();
+            case INVALID: return new InvalidTask();
+            default: return new InvalidTask();
         }
     }
 }

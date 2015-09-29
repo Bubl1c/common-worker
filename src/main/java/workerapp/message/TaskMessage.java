@@ -1,19 +1,19 @@
-package worker.message;
+package workerapp.message;
 
-import worker.task.Task;
+import workerapp.task.Task;
 
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-public abstract class Message<T extends Message.Content> {
+public abstract class TaskMessage<T extends TaskMessage.Content> {
     protected String id;
     protected Task.Type taskType;
     protected T content;
 
-    public Message() {
+    public TaskMessage() {
     }
 
-    public Message(String id, Task.Type taskType, T content) {
+    public TaskMessage(String id, Task.Type taskType, T content) {
         this.id = id;
         this.taskType = taskType;
         this.content = content;
