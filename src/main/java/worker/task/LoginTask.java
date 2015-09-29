@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-@Component
-@Scope(value = "prototype")
 public class LoginTask extends Task {
 
     public LoginTask() {

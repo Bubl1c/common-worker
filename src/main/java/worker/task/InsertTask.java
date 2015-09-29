@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-@Component
-@Scope(scopeName = "prototype")
 public class InsertTask extends Task {
     @Autowired
     Dummy dc;
