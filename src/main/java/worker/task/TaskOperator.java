@@ -15,9 +15,6 @@ public class TaskOperator/*<T extends Task>*/ {
     MessageBroker messageBroker;
 
     @Autowired
-    TaskFactory taskFactory;
-
-    @Autowired
     MessageToTaskConverter messageToTaskConverter;
 
     public void doProcess() {

@@ -1,5 +1,7 @@
 package worker.task;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import worker.message.Message;
 
 /**
@@ -17,27 +19,27 @@ public abstract class Task {
 
     public abstract WorkResult process();
 
-    public enum Type {
-        INSERT {
-            @Override
-            public InsertTask getTask() {
-                return new InsertTask();
-            }
-        }, LOGIN {
-            @Override
-            public LoginTask getTask() {
-                return new LoginTask();
-            }
-        };
-
-        public abstract <T extends Task> T getTask();
-    }
-
     public Message getMessage() {
         return message;
     }
 
     public void setMessage(Message message) {
         this.message = message;
+    }
+
+    public static enum Type {
+        INSERT {
+            @Override
+            public Class getTaskClass() {
+                return InsertTask.class;
+            }
+        }, LOGIN {
+            @Override
+            public Class getTaskClass() {
+                return LoginTask.class;
+            }
+        };
+
+        public abstract Class getTaskClass();
     }
 }
