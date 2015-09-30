@@ -1,5 +1,7 @@
 package workerapp.task.impl;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import workerapp.entity.Record;
@@ -9,29 +11,31 @@ import workerapp.repository.RecordRepository;
 import workerapp.task.Task;
 import workerapp.task.WorkResult;
 
+import java.util.List;
+
 /**
- * Created by Andrii Mozharovskyi on 25.09.2015.
+ * Created by Andrii Mozharovskyi on 30.09.2015.
  */
-public class InsertTask extends Task {
+
+public class FindTask extends Task{
     @Autowired
     private ObjectMapper jacksonObjectMapper;
     @Autowired
     RecordRepository recordRepository;
 
-    public InsertTask() {
+    public FindTask() {
     }
 
-    public InsertTask(TaskMessage taskMessage) {
-        super(taskMessage);
+    public FindTask(TaskMessage message) {
+        super(message);
     }
 
     @Override
     public WorkResult process() {
-//        Record record = jacksonObjectMapper.convertValue(message.getContent().getData(), Record.class);
-        Record record = (Record) message.getContent().getData();
-        recordRepository.save(record);
-        message.setContent(new TaskMessage.Content("Successful"));
-        System.out.println("--- INSERTed : " + record);
+        String ip = (String) message.getContent().getData();
+        List<Record> records = recordRepository.findByIp(ip);
+        message.setContent(new TaskMessage.Content(records));
+        System.out.println("--- Find by IP: " + ip + " found " + records);
         return new WorkResult(message);
     }
 }

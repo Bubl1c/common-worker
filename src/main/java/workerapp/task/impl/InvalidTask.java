@@ -1,5 +1,6 @@
 package workerapp.task.impl;
 
+import workerapp.message.HttpTaskMessage;
 import workerapp.task.Task;
 import workerapp.task.WorkResult;
 import workerapp.task.exceptions.InvalidTaskException;
@@ -9,7 +10,7 @@ import workerapp.task.exceptions.InvalidTaskException;
  */
 public class InvalidTask extends Task {
     @Override
-    public WorkResult process() throws InvalidTaskException {
-        throw new InvalidTaskException(this);
+    public WorkResult process() {
+        return new WorkResult(new HttpTaskMessage()); //TODO: implement real work result for invalid task
     }
 }

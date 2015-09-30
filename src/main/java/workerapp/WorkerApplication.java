@@ -17,13 +17,13 @@ public class WorkerApplication implements CommandLineRunner {
     InterruptibleWorkersManager workersManager;
 
     @Autowired
-    Shit shit;
+    ApplicationManager applicationManager;
 
     private final Lock lock = new ReentrantLock();
 
     @Override
     public void run(String... strings) throws Exception {
-       shit.process();
+       applicationManager.startApp(1);
     }
 
     public static void main(String[] args) {

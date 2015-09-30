@@ -16,7 +16,7 @@ public abstract class Task {
         this.message = message;
     }
 
-    public abstract WorkResult process() throws TaskException;
+    public abstract WorkResult process();
 
     public TaskMessage getMessage() {
         return message;
@@ -27,6 +27,6 @@ public abstract class Task {
     }
 
     public enum Type {
-        INSERT, LOGIN, STOP, INVALID
+        INSERT, FIND, LOGIN, STOP, INVALID
     }
 }

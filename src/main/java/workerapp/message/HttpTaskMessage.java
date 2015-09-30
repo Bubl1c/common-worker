@@ -15,21 +15,9 @@ public class HttpTaskMessage extends TaskMessage<HttpTaskMessage.Content> {
     }
 
     public static class Content extends TaskMessage.Content {
-        protected String data;
 
-        public Content() {
-        }
-
-        public Content(String data) {
-            this.data = data;
-        }
-
-        public String getData() {
-            return data;
-        }
-
-        public void setData(String data) {
-            this.data = data;
+        public Content(Object data) {
+            super(data);
         }
     }
 

@@ -18,7 +18,7 @@ public class LoginTask extends Task {
 
     @Override
     public WorkResult process() {
-        System.out.println("LOGIN!");
+        System.out.println("+++  LOGIN");
         return new WorkResult(message);
     }
 }

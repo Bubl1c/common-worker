@@ -19,7 +19,20 @@ public abstract class TaskMessage<T extends TaskMessage.Content> {
         this.content = content;
     }
 
-    public static abstract class Content {
+    public static class Content {
+        private Object data;
+
+        public Content(Object data) {
+            this.data = data;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setData(Object data) {
+            this.data = data;
+        }
     }
 
     public String getId() {

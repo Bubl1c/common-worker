@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import workerapp.managers.InterruptibleWorkersManager;
+import workerapp.managers.WorkersManager;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,7 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by Andrii Mozharovskyi on 29.09.2015.
  */
 @Service
-public class Shit {
+public class ApplicationManager {
     @Autowired
     InterruptibleWorkersManager workersManager;
 
@@ -20,12 +21,16 @@ public class Shit {
 
     private final Lock lock = new ReentrantLock();
 
-    public void process() {
-        workersManager.addWorkers(3);
+    public void startApp(int workersToStart) {
+        workersManager.addWorkers(workersToStart);
         while(!isInterrupted) {
-            lock.lock();
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        workersManager.stopWorkers(5);
+        workersManager.stopWorkers(WorkersManager.WORKERS_LIMIT);
     }
 
     public void interrupt(){
