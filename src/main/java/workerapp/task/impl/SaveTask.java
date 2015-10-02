@@ -31,6 +31,7 @@ public class SaveTask extends Task {
         recordRepository.save(record);
         message.setContent(new TaskMessage.Content("Successful"));
         System.out.println("--- INSERTed : " + record);
+
         return new WorkResult(message);
     }
 }
