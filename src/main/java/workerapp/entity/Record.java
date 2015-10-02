@@ -110,7 +110,7 @@ public class Record {
     public String toString() {
         return "Record{" +
                 "id=" + id +
-                ", type=" + type +
+                ", taskType=" + type +
                 ", date=" + date +
                 ", ip='" + ip + '\'' +
                 ", email='" + email + '\'' +

@@ -1,4 +1,4 @@
-package workerapp.task;
+package workerapp.task.converter;
 
 import workerapp.message.TaskMessage;
 import workerapp.task.Task;

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import workerapp.task.Task;
 import workerapp.task.WorkResult;
-import workerapp.task.TaskOperator;
+import workerapp.task.TaskProvider;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -17,15 +17,15 @@ import java.util.concurrent.TimeoutException;
 @Scope("prototype")
 public class DefaultInterruptibleWorker extends InterruptibleWorker {
     @Autowired
-    TaskOperator taskOperator;
+    TaskProvider taskProvider;
 
     @Override
     public void start() {
         while(!isInterrupted()) {
             try {
-                Task task = taskOperator.getTask();
+                Task task = taskProvider.getTask();
                 WorkResult workResult = task.process();
-                taskOperator.sendResult(workResult);
+                taskProvider.sendResult(workResult);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 continue;

@@ -5,7 +5,7 @@ import workerapp.task.Task;
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-public class HttpTaskMessage extends TaskMessage<HttpTaskMessage.Content> {
+public class HttpTaskMessage extends TaskMessage {
 
     public HttpTaskMessage() {
     }
@@ -15,6 +15,9 @@ public class HttpTaskMessage extends TaskMessage<HttpTaskMessage.Content> {
     }
 
     public static class Content extends TaskMessage.Content {
+
+        public Content() {
+        }
 
         public Content(Object data) {
             super(data);

@@ -12,23 +12,22 @@ import workerapp.task.WorkResult;
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-public class InsertTask extends Task {
+public class SaveTask extends Task {
     @Autowired
     private ObjectMapper jacksonObjectMapper;
     @Autowired
     RecordRepository recordRepository;
 
-    public InsertTask() {
+    public SaveTask() {
     }
 
-    public InsertTask(TaskMessage taskMessage) {
+    public SaveTask(TaskMessage taskMessage) {
         super(taskMessage);
     }
 
     @Override
     public WorkResult process() {
-//        Record record = jacksonObjectMapper.convertValue(message.getContent().getData(), Record.class);
-        Record record = (Record) message.getContent().getData();
+        Record record = jacksonObjectMapper.convertValue(message.getContent(), Record.class);
         recordRepository.save(record);
         message.setContent(new TaskMessage.Content("Successful"));
         System.out.println("--- INSERTed : " + record);

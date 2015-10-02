@@ -1,17 +1,13 @@
 package workerapp.task;
 
 import org.springframework.context.annotation.Scope;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 import workerapp.message.HttpClient;
 import workerapp.message.HttpTaskMessage;
 import workerapp.message.TaskMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import workerapp.task.converter.MessageToTaskConverter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -19,7 +15,7 @@ import java.util.concurrent.*;
  */
 @Component
 @Scope("prototype")
-public class HttpTaskOperator implements TaskOperator {
+public class HttpTaskProvider implements TaskProvider {
     @Autowired
     HttpClient httpClient;
 
@@ -28,9 +24,8 @@ public class HttpTaskOperator implements TaskOperator {
 
     @Override
     public Task getTask() throws ExecutionException, InterruptedException, TimeoutException {
-        Future<HttpTaskMessage> futureMessage = httpClient.get("");
+        Future<HttpTaskMessage> futureMessage = httpClient.get("tasks/get");
         TaskMessage taskMessage  = futureMessage.get(GET_TASK_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
-
         return messageToTaskConverter.convert(taskMessage);
     }
 
@@ -41,7 +36,7 @@ public class HttpTaskOperator implements TaskOperator {
         do {
             repeatsCounter++;
             try {
-                isSent = httpClient.post("", result.getTaskMessage()).get(SEND_RESULT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+                isSent = httpClient.post("tasks/result", result.getTaskMessage()).get(SEND_RESULT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
             } catch (TimeoutException e) {
                 continue;
             }

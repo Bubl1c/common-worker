@@ -5,32 +5,35 @@ import workerapp.task.Task;
 /**
  * Created by Andrii Mozharovskyi on 25.09.2015.
  */
-public abstract class TaskMessage<T extends TaskMessage.Content> {
+public abstract class TaskMessage {
     protected String id;
     protected Task.Type taskType;
-    protected T content;
+    protected Object content;
 
     public TaskMessage() {
     }
 
-    public TaskMessage(String id, Task.Type taskType, T content) {
+    public TaskMessage(String id, Task.Type taskType, Object content) {
         this.id = id;
         this.taskType = taskType;
         this.content = content;
     }
 
     public static class Content {
-        private Object data;
+        private java.lang.Object data;
 
-        public Content(Object data) {
+        public Content() {
+        }
+
+        public Content(java.lang.Object data) {
             this.data = data;
         }
 
-        public Object getData() {
+        public java.lang.Object getData() {
             return data;
         }
 
-        public void setData(Object data) {
+        public void setData(java.lang.Object data) {
             this.data = data;
         }
     }
@@ -51,11 +54,11 @@ public abstract class TaskMessage<T extends TaskMessage.Content> {
         this.taskType = taskType;
     }
 
-    public T getContent() {
+    public Object getContent() {
         return content;
     }
 
-    public void setContent(T content) {
+    public void setContent(Object content) {
         this.content = content;
     }
 }
