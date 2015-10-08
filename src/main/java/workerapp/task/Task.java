@@ -28,22 +28,7 @@ public abstract class Task {
     }
 
     public enum Type {
-        LOGIN {
-            @Override
-            public LoginTask getTaskInstance() {
-                return new LoginTask();
-            }
-        }, SAVE {
-            @Override
-            public SaveTask getTaskInstance() {
-                return new SaveTask();
-            }
-        }, FIND_BY_IP {
-            @Override
-            public FindByIpTask getTaskInstance() {
-                return new FindByIpTask();
-            }
-        }, DELIVERED {
+        DELIVERED {
             @Override
             public DeliveredTask getTaskInstance() {
                 return new DeliveredTask();
@@ -52,6 +37,12 @@ public abstract class Task {
             @Override
             public FailedTask getTaskInstance() {
                 return new FailedTask();
+            }
+        },
+        STOP {
+            @Override
+            public StopTask getTaskInstance() {
+                return new StopTask();
             }
         }, RESULT, COMMON;
 
